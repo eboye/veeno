@@ -33,11 +33,11 @@ export default {
       default: null
     },
     connect: {
-      type: [Boolean, Array], 
+      type: [Boolean, Array],
       default: false    // validate values are boolean
     },
     tooltips: {
-      type: [Boolean, Array], 
+      type: [Boolean, Array],
       default: false    // validate values are boolean
     },
     step: {
@@ -56,7 +56,7 @@ export default {
     },
     rtl: {
       type: Boolean,
-      default: false 
+      default: false
     },
     // test below (set) prop for both types i.e. Number, Array
     set: {
@@ -67,7 +67,7 @@ export default {
     behaviour: {
       type: String,
       default: 'tap',
-      validator: (value) => ['drag', 'tap', 'fixed', 'snap', 'none'].indexOf( value !== -1)
+      validator: (value) => ['drag', 'tap', 'fixed', 'snap', 'none', 'unconstrained-values', 'unconstrained'].indexOf( value !== -1)
     },
     getset: {
       type: Function,
@@ -75,13 +75,13 @@ export default {
     }
   },
   created () {
-    this.optionz = Object.assign({}, 
-      this.options, this.$props, 
+    this.optionz = Object.assign({},
+      this.options, this.$props,
       // this.vertical ? this.options.orientation = 'vertical': '',
       this.vertical && (this.options.orientation = 'vertical'),
       this.handles && (this.options.start = this.handles),
       this.rtl && (this.options.direction = 'rtl'),
-      this.pipsy && !Object.keys(this.pipsy).length ? 
+      this.pipsy && !Object.keys(this.pipsy).length ?
         this.options.pips = {mode: 'range',density: 5} : this.options.pips = this.pipsy
     )
   },
@@ -89,7 +89,7 @@ export default {
     let slider = this.$el;
     this.options.orientation === 'vertical' && (slider.style.height = '100%')
     noUiSlider.create(slider, this.optionz)
-    
+
     events.forEach(event => {
       slider.noUiSlider.on(event, (values, handle, unencoded, tap, positions) => {
         this.$emit(event, {values, handle, unencoded, tap, positions})
@@ -99,19 +99,19 @@ export default {
     this.getset(slider)
   },
   render (createElement) {
-    let child = createElement('input', 
+    let child = createElement('input',
         {
           attrs: {
             'type': 'hidden',
             name:this.name,
           },
-          class:this.inputClass 
+          class:this.inputClass
         },
       )
-    let span = createElement('span', spanOptions,this.$slots.default) 
+    let span = createElement('span', spanOptions,this.$slots.default)
 
-    return createElement('div', 
-    divOptions, 
+    return createElement('div',
+    divOptions,
     [
       child,
       span
