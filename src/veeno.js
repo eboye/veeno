@@ -67,7 +67,7 @@ export default {
     behaviour: {
       type: String,
       default: 'tap',
-      validator: (value) => ['drag', 'tap', 'fixed', 'snap', 'none', 'unconstrained-values', 'unconstrained'].indexOf( value !== -1)
+      validator: (value) => ['drag', 'tap', 'fixed', 'snap', 'none', 'unconstrained-tap'].indexOf( value !== -1)
     },
     getset: {
       type: Function,

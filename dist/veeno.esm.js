@@ -67,7 +67,7 @@ var veeno = {
     behaviour: {
       type: String,
       default: 'tap',
-      validator: function (value) { return ['drag', 'tap', 'fixed', 'snap', 'none', 'unconstrained-values', 'unconstrained'].indexOf( value !== -1); }
+      validator: function (value) { return ['drag', 'tap', 'fixed', 'snap', 'none', 'unconstrained-tap'].indexOf( value !== -1); }
     },
     getset: {
       type: Function,
